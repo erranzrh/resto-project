@@ -1,0 +1,63 @@
+{
+  "user": [
+    {
+      "name": "erra",
+      "email": "erra@test",
+      "password": "abc@123"
+    },
+    {
+      "id": "f968",
+      "name": "erra",
+      "email": "erra@test",
+      "password": "abc@123"
+    },
+    {
+      "id": "76d7",
+      "name": "Erra",
+      "email": "eranazirah01@gmail.com",
+      "password": "Err@123"
+    },
+    {
+      "id": "aabe",
+      "name": "Fiza",
+      "email": "fiza@test.com",
+      "password": "12345"
+    },
+    {
+      "id": "2436",
+      "name": "rehana",
+      "email": "rehana@test.com",
+      "password": "rehana123"
+    },
+    {
+      "id": "4864",
+      "name": "nisa",
+      "email": "nisa@test.com",
+      "password": "123"
+    },
+    {
+      "id": "88cc",
+      "name": "Amir",
+      "email": "amir@test.com",
+      "password": "amira@123"
+    },
+    {
+      "id": "ae7e",
+      "name": "ali",
+      "email": "ali@test.com",
+      "password": "123"
+    },
+    {
+      "id": "63a7",
+      "name": "erra",
+      "email": "erra@test",
+      "password": "abc@123"
+    },
+    {
+      "id": "792b",
+      "name": "Admin Dina Dynasty",
+      "email": "admin@gmail.com",
+      "password": "Admin@123"
+    }
+  ]
+}
