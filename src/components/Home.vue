@@ -1,17 +1,75 @@
 <template>
     <div>
-        <h1>Hello User, Welcome to the Home Page</h1>
+        <AppHeader />
+        <div>
+            <h1>Hello {{name}}, Welcome to the Home Page</h1>
+            <div class = table-container>
+                <table border="1px">
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                </tr>
+                <tr v-for="item in menu" :key="item.id">
+                <td>{{item.name }}</td>
+                <td>RM {{item.price }}</td>
+                <td>{{item.description }}</td>
+                </tr>
+            </table>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import AppHeader from './AppHeader.vue'
+import axios from 'axios';
 export default {
     name: 'HomePage',
-    mounted() {
+    data(){
+        return{
+            name:'',
+            menu:[],
+        }
+    },
+    components: {
+        AppHeader
+    },
+    async mounted() 
+    {
         let user = localStorage.getItem('user-info');
+        this.name = JSON.parse(user).name
         if (!user) {
             this.$router.push({ name: 'SignUp' });
         }
+        let result = await axios.get("http://localhost:3000/menu");
+        console.warn(result)
+        this.menu = result.data;
     }
 }
 </script>
+<style>
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    width: 300px;
+    height: 40px;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+</style>

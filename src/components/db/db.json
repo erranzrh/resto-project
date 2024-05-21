@@ -3,7 +3,8 @@
     {
       "name": "erra",
       "email": "erra@test",
-      "password": "abc@123"
+      "password": "abc@123",
+      "id": "1730"
     },
     {
       "id": "f968",
@@ -58,6 +59,60 @@
       "name": "Admin Dina Dynasty",
       "email": "admin@gmail.com",
       "password": "Admin@123"
+    },
+    {
+      "id": "af1d",
+      "name": "erra",
+      "email": "erra@test",
+      "password": "abc@123"
+    },
+    {
+      "id": "e4ce",
+      "name": "zy",
+      "email": "zy@test",
+      "password": "zy@123"
+    }
+  ],
+  "menu": [
+    {
+      "name": "Nasi Goreng Kampung",
+      "price": 20.99,
+      "description": "Fried chicken served with spicy sambal, cucumber, and rice."
+    },
+    {
+      "name": "Ayam Penyet",
+      "price": 18.5,
+      "description": "Fried chicken served with spicy sambal, cucumber, and rice."
+    },
+    {
+      "id": "a427",
+      "name": "Nasi with Ayam Rendang",
+      "price": "15.99",
+      "description": "Nasi with Fresh Ayam Rendang"
+    },
+    {
+      "id": "8e79",
+      "name": "Chocolate Milkshake",
+      "price": "16.99",
+      "description": "Chocolate with milk"
+    },
+    {
+      "id": "3b10",
+      "name": "Avocado Milkshake",
+      "price": "15.99",
+      "description": "avocado with milk"
+    },
+    {
+      "id": "2e37",
+      "name": "Banana Milkshake",
+      "price": "10.99",
+      "description": "Banana with milk"
+    },
+    {
+      "id": "4525",
+      "name": "Steak",
+      "price": "16.99",
+      "description": "Lamb Steak"
     }
   ]
 }

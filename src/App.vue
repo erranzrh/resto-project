@@ -21,7 +21,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+body{
+  padding: 0;
+  margin: 0;
 }
 .signup-container {
   text-align: center;
@@ -39,14 +42,14 @@ export default {
   width: 500px; /* Adjust the size as needed */
 }
 
-.register {
+.register, .addMenu {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
-.register input {
+.register input, .addMenu input{
   width: 300px;
   padding: 10px;
   margin: 10px 0;
@@ -71,5 +74,8 @@ export default {
   background-color: #FAD12B;
 }
 
-
+.table{
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>
