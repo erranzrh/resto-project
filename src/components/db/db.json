@@ -71,15 +71,23 @@
       "name": "zy",
       "email": "zy@test",
       "password": "zy@123"
+    },
+    {
+      "id": "6bc2",
+      "name": "tyh",
+      "email": "tyh@dd.com",
+      "password": "tyh"
     }
   ],
   "menu": [
     {
+      "id": "0001",
       "name": "Nasi Goreng Kampung",
       "price": 20.99,
       "description": "Fried chicken served with spicy sambal, cucumber, and rice."
     },
     {
+      "id": "0002",
       "name": "Ayam Penyet",
       "price": 18.5,
       "description": "Fried chicken served with spicy sambal, cucumber, and rice."
@@ -91,10 +99,10 @@
       "description": "Nasi with Fresh Ayam Rendang"
     },
     {
-      "id": "8e79",
       "name": "Chocolate Milkshake",
       "price": "16.99",
-      "description": "Chocolate with milk"
+      "description": "Chocolate with milk",
+      "id": "8e79"
     },
     {
       "id": "3b10",
@@ -109,10 +117,16 @@
       "description": "Banana with milk"
     },
     {
-      "id": "4525",
       "name": "Steak",
       "price": "16.99",
-      "description": "Lamb Steak"
+      "description": "Lamb Steak",
+      "id": "4525"
+    },
+    {
+      "name": "Tom Yam",
+      "price": "9.80",
+      "description": "Spicy tom yam soup",
+      "id": "9271"
     }
   ]
 }

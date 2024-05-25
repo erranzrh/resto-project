@@ -29,7 +29,7 @@ const routes = [
   {
     name: 'UpdateMenu',
     component: UpdateMenu,
-    path: '/update-menu'
+    path: '/update-menu/:id'
   },
 ];
 

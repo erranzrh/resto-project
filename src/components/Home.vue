@@ -9,11 +9,13 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Description</th>
+                    <th>Actions</th>
                 </tr>
                 <tr v-for="item in menu" :key="item.id">
                 <td>{{item.name }}</td>
                 <td>RM {{item.price }}</td>
                 <td>{{item.description }}</td>
+                <td><router-link :to="'/update-menu/'+item.id">Update</router-link></td>
                 </tr>
             </table>
             </div>
