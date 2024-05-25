@@ -77,15 +77,15 @@
       "name": "tyh",
       "email": "tyh@dd.com",
       "password": "tyh"
+    },
+    {
+      "id": "2091",
+      "name": "fiza",
+      "email": "fiza@gmail.com",
+      "password": "123@567"
     }
   ],
   "menu": [
-    {
-      "id": "0001",
-      "name": "Nasi Goreng Kampung",
-      "price": 20.99,
-      "description": "Fried chicken served with spicy sambal, cucumber, and rice."
-    },
     {
       "id": "0002",
       "name": "Ayam Penyet",
@@ -97,12 +97,6 @@
       "name": "Nasi with Ayam Rendang",
       "price": "15.99",
       "description": "Nasi with Fresh Ayam Rendang"
-    },
-    {
-      "name": "Chocolate Milkshake",
-      "price": "16.99",
-      "description": "Chocolate with milk",
-      "id": "8e79"
     },
     {
       "id": "3b10",
