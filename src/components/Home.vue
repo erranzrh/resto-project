@@ -15,8 +15,9 @@
                 <td>{{item.name }}</td>
                 <td>RM {{item.price }}</td>
                 <td>{{item.description }}</td>
-                <td><router-link :to="'/update-menu/'+item.id">Update</router-link></td>
-                </tr>
+                <td><router-link :to="'/update-menu/'+item.id">Update</router-link>
+                <button v-on:click= "deleteRestaurant(item.id)">Delete</button></td>
+            </tr>
             </table>
             </div>
         </div>
@@ -37,8 +38,18 @@ export default {
     components: {
         AppHeader
     },
-    async mounted() 
-    {
+
+    methods: {
+        async deleteRestaurant(id){
+            let result =await axios.delete("http://localhost:3000/menu/"+ id);
+            console.warn(result)
+            if(result.status==200)
+            {
+                this.loadData()
+            }
+        },
+        async loadData()
+        {
         let user = localStorage.getItem('user-info');
         this.name = JSON.parse(user).name
         if (!user) {
@@ -47,6 +58,14 @@ export default {
         let result = await axios.get("http://localhost:3000/menu");
         console.warn(result)
         this.menu = result.data;
+        }
+        
+    },
+
+    async mounted() 
+    {
+        this.loadData();
+
     }
 }
 </script>
