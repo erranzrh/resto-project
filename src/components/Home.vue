@@ -1,132 +1,108 @@
 <template>
+  <div>
+    <AppHeader />
     <div>
-      <AppHeader />
-      <div>
-        <h1>Hello {{ name }}, Welcome to the Home Page</h1>
-        <div class="table-container">
-          <table border="1px">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in menu" :key="item.id">
-                <td>{{ item.name }}</td>
-                <td>RM {{ item.price }}</td>
-                <td>{{ item.description }}</td>
-                <td>
-                  <router-link :to="'/update-menu/' + item.id">
-                    <button class="update-button">Update</button>
-                  </router-link>
-                  <button class="delete-button" @click="deleteRestaurant(item.id)">Delete</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <h1>Hello {{ name }}, Welcome to the Home Page</h1>
+      <div class="table-container">
+        <table border="1px">
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+          </tr>
+          <tr v-for="item in menu" :key="item.id">
+            <td>{{ item.name }}</td>
+            <td>RM {{ item.price }}</td>
+            <td>{{ item.description }}</td>
+          </tr>
+        </table>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import AppHeader from './AppHeader.vue';
-  import axios from 'axios';
-  
-  export default {
-    name: 'HomePage',
-    data() {
-      return {
-        name: '',
-        menu: [],
-      };
-    },
-    components: {
-      AppHeader,
-    },
-    methods: {
-      async deleteRestaurant(id) {
-        let result = await axios.delete('http://localhost:3000/menu/' + id);
-        console.warn(result);
-        if (result.status == 200) {
-          this.loadData();
+  </div>
+</template>
+
+<script>
+import AppHeader from './AppHeader.vue';
+import axios from 'axios';
+
+export default {
+  name: 'HomePage',
+  components: {
+    AppHeader
+  },
+  data() {
+    return {
+      name: '',
+      menu: [],
+      isAdmin: false,
+      orderHistory: []
+    };
+  },
+  methods: {
+    async deleteRestaurant(id) {
+      try {
+        const result = await axios.delete(`http://localhost:3000/menu/${id}`);
+        console.log(result);
+        if (result.status === 200) {
+          this.loadMenu();
         }
-      },
-      async loadData() {
+      } catch (error) {
+        console.error('Error deleting menu item:', error);
+        alert('Failed to delete menu item. Please try again.');
+      }
+    },
+    async loadMenu() {
+      try {
         let user = localStorage.getItem('user-info');
-        if (!user) {
+        if (user) {
+          user = JSON.parse(user);
+          this.name = user.name;
+          this.isAdmin = user.role === 'admin';
+        } else {
           this.$router.push({ name: 'SignUp' });
-          return;
         }
-        this.name = JSON.parse(user).name;
-  
-        let result = await axios.get('http://localhost:3000/menu');
-        console.warn(result);
+        
+        const result = await axios.get('http://localhost:3000/menu');
+        console.log(result);
         this.menu = result.data;
-      },
+      } catch (error) {
+        console.error('Error loading menu:', error);
+        alert('Failed to load menu items. Please refresh the page.');
+      }
     },
-    async mounted() {
-      this.loadData();
-    },
-  };
-  </script>
-  
-  <style>
-  .table-container {
-    display: flex;
-    justify-content: center;
+    async updateOrderHistory(newHistory) {
+      this.orderHistory = newHistory;
+    }
+  },
+  async mounted() {
+    await this.loadMenu();
   }
-  
-  table {
-    border-collapse: collapse;
-    width: 80%;
-    margin-top: 20px;
-  }
-  
-  thead th {
-    background-color: #f2f2f2;
-  }
-  
-  td, th {
-    text-align: left;
-    padding: 12px;
-  }
-  
-  tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-  }
-  
-  tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  button {
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .update-button {
-    background-color: #007bff;
-    color: white;
-    margin-right: 5px;
-  }
-  
-  .update-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
-  </style>
-  
+};
+</script>
+
+
+<style>
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  width: 300px;
+  height: 40px;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+</style>

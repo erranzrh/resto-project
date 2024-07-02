@@ -89,6 +89,27 @@
       "name": "",
       "email": "fiza@gmail.com",
       "password": "123@567"
+    },
+    {
+      "id": "b551",
+      "name": "Tina ",
+      "email": "tina@gmail.com",
+      "password": "Tina123",
+      "role": "admin"
+    },
+    {
+      "id": "f617",
+      "name": "Aiman",
+      "email": "aiman@gmail.com",
+      "password": "Aiman123",
+      "role": "customer"
+    },
+    {
+      "id": "247a",
+      "name": "Tina",
+      "email": "Tina@gmail.com",
+      "password": "Tina123",
+      "role": "customer"
     }
   ],
   "menu": [
@@ -139,6 +160,12 @@
       "price": "6.00",
       "description": "Fried egg with soup ",
       "id": "d591"
+    },
+    {
+      "id": "c2c1",
+      "name": "Nasi Kerabu",
+      "price": "10.00",
+      "description": "Blue Rice with Ayam Bakar "
     }
   ]
 }
