@@ -1,10 +1,10 @@
 <template>
-  <div class="login-page">
-    <div class="login-container">
+  <div class="signup-page">
+    <div class="signup-container">
       <div class="welcome-section">
       </div>
-      <div class="login-section">
-        <div class="login-form">
+      <div class="signup-section">
+        <div class="signup-form">
           <h1>Sign Up</h1>
           <p>Welcome to DineDynasty - Your Table is Ready</p>
           <div class="register">
@@ -46,7 +46,12 @@ export default {
         console.warn(result);
         if (result.status === 201) {
           localStorage.setItem("user-info", JSON.stringify(result.data));
-          this.$router.push({ name: 'Menu' });
+          const userRole = result.data.role;
+          if (userRole === 'admin') {
+            this.$router.push({ name: 'Home' });
+          } else {
+            this.$router.push({ name: 'CustomerMenu' });
+          }
         }
       } catch (error) {
         console.error("There was an error during sign-up:", error);
@@ -57,7 +62,12 @@ export default {
   mounted() {
     let user = localStorage.getItem('user-info');
     if (user) {
-      this.$router.push({ name: 'Home' });
+      user = JSON.parse(user);
+      if (user.role === 'admin') {
+        this.$router.push({ name: 'Home' });
+      } else {
+        this.$router.push({ name: 'CustomerMenu' });
+      }
     }
   }
 };
@@ -80,6 +90,31 @@ export default {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+}
+
+.welcome-section {
+  flex: 1;
+  background: url("../assets/signup.png") no-repeat center center;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 40px;
+}
+
+.welcome-content {
+  text-align: center;
+}
+
+.welcome-section h1 {
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.welcome-section p {
+  font-size: 1.2em;
+  margin: 20px 0 0;
 }
 
 .signup-section {
@@ -134,30 +169,5 @@ export default {
 .register p {
   margin-top: 20px;
   color: #666;
-}
-
-.welcome-section {
-  flex: 1;
-  background: url("../assets/signup.png") no-repeat center center;
-  background-size: contain;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  padding: 40px;
-}
-
-.welcome-content {
-  text-align: center;
-}
-
-.welcome-section h1 {
-  font-size: 2.5em;
-  margin: 0;
-}
-
-.welcome-section p {
-  font-size: 1.2em;
-  margin: 20px 0 0;
 }
 </style>
