@@ -1,7 +1,7 @@
 <template>
   <div>
-    <AppHeader />
-    <div class="container">
+    <AppHeader class="sidebar" />
+    <div class="main-content">
       <h1>Admin Dashboard</h1>
       <div class="stats-container">
         <div class="stat-card">
@@ -52,7 +52,7 @@ export default {
         // Fetch statistics from backend
         const [userResponse, menuResponse, orderResponse, revenueResponse] = await Promise.all([
           axios.get('http://localhost:3000/user'),
-          axios.get('http://localhost:3000/menu'),
+          axios.get('http://localhost:8000/api/menus'),
           axios.get('http://localhost:3000/orders'),
           axios.get('http://localhost:3000/orders/total-revenue'),
         ]);
@@ -74,14 +74,41 @@ export default {
 </script>
 
 <style>
-.container {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #FFB22C;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.main-content {
+  margin-left: 250px;
   padding: 40px;
+  width: calc(100% - 250px);
+  height: 100vh;
+  overflow: auto;
 }
 
 .stats-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  gap: 80px;
   justify-items: center;
   margin-top: 20px;
 }
@@ -92,6 +119,9 @@ export default {
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure all cards take full width of the grid cell */
+  max-width: 400px; /* Set a max-width to make them look uniform */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
 .stat-image {

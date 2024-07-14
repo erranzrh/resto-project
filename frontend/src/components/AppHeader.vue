@@ -1,11 +1,11 @@
 <template>
-  <div class="nav">
-    <router-link to="/">Home</router-link>
+  <div class="sidebar">
+    <img src="../assets/DineDynasty.png" alt="Dine Dynasty Logo" class="logo" />
+    <router-link v-if="isAdmin" to="/">Home</router-link>
     <router-link v-if="isAdmin" to="/add-menu">Add Menu</router-link>
-    <router-link v-if="!isAdmin" to="/menu">List Of Menu</router-link>
+    <router-link v-if="!isAdmin" to="/customer-menu">List Of Menu</router-link>
     <router-link v-if="!isAdmin" to="/cart">Cart</router-link>
     <router-link v-if="isAdmin" to="/report">Report</router-link>
-    <!-- <router-link to="/order-history">Order History</router-link> New link for order history -->
     <a v-on:click="logout" href="#">Logout</a>
   </div>
 </template>
@@ -35,22 +35,33 @@ export default {
 </script>
 
 <style>
-.nav {
-  background-color: #333;
-  overflow: hidden;
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background-color: #FFB22C;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center; /* Center align items */
 }
 
-.nav a {
-  float: left;
-  color: #f2f2f2;
-  padding: 14px 14px;
-  text-align: center;
-  font-size: 17px;
+.logo {
+  width: 150px;
+  margin-bottom: 20px; /* Add some space below the logo */
+}
+
+.sidebar a {
+  color: white;
+  padding: 10px;
+  text-align: left;
   text-decoration: none;
-  margin-right: 5px;
+  margin-bottom: 10px;
+  width: 100%; /* Make links take full width */
+  text-align: left; /* Center text within links */
 }
 
-.nav a:hover {
+.sidebar a:hover {
   background-color: #ddd;
   color: #333;
 }

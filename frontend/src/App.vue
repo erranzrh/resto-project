@@ -49,7 +49,7 @@ body{
   margin-top: 20px;
 }
 
-.register input, .addMenu input{
+.register input {
   width: 300px;
   padding: 10px;
   margin: 10px 0;
