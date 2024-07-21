@@ -8,7 +8,9 @@ import AdminMenu from './components/AdminMenu.vue';
 import CustomerMenu from './components/CustomerMenu.vue';
 import ShoppingCart from './components/Cart.vue';
 import Report from './components/ReportAnalysis.vue';
-// import OrderHistory from './components/History.vue';
+import OrderHistory from './components/OrderHistory.vue'; 
+import Notification from './components/Notification.vue'; 
+
 
 const routes = [
   { name: 'Home', component: Home, path: '/' },
@@ -20,7 +22,10 @@ const routes = [
   { name: 'CustomerMenu', component: CustomerMenu, path: '/customer-menu' },
   { name: 'Cart', component: ShoppingCart, path: '/cart' },
   { name: 'Report', component: Report, path: '/report' },
-  // { name: 'OrderHistory', component: OrderHistory, path: '/order-history' }
+  { name: 'OrderHistory', component: OrderHistory, path: '/order-history' },
+  { name: 'Notification', component: Notification, path: '/notifications-page' } 
+
+
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });

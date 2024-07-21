@@ -51,16 +51,16 @@ export default {
       try {
         // Fetch statistics from backend
         const [userResponse, menuResponse, orderResponse, revenueResponse] = await Promise.all([
-          axios.get('http://localhost:3000/user'),
-          axios.get('http://localhost:8000/api/menus'),
-          axios.get('http://localhost:3000/orders'),
-          axios.get('http://localhost:3000/orders/total-revenue'),
+          axios.get('http://localhost:8000/api/users/count'),
+          axios.get('http://localhost:8000/api/menus/count'),
+          axios.get('http://localhost:8000/api/orders/count'),
+          axios.get('http://localhost:8000/api/orders/total-revenue'),
         ]);
 
         // Update data
-        this.userCount = userResponse.data.length;
-        this.menuCount = menuResponse.data.length;
-        this.orderCount = orderResponse.data.length;
+        this.userCount = userResponse.data.userCount;
+        this.menuCount = menuResponse.data.menuCount;
+        this.orderCount = orderResponse.data.orderCount;
         this.totalRevenue = revenueResponse.data.totalRevenue; // Assuming the backend returns total revenue
       } catch (error) {
         console.error('Error loading data:', error);

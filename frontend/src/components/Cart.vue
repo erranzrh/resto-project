@@ -25,7 +25,7 @@
                 </td>
                 <td>RM {{ item.price }}</td>
                 <td>
-                  <input type="number" v-model="item.quantity" min="1" class="quantity-input" />
+                  <input type="number" v-model="item.quantity" min="1" class="quantity-input" @change="updateQuantity(item, index)" />
                 </td>
                 <td>RM {{ (item.price * item.quantity).toFixed(2) }}</td>
                 <td>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import AppHeader from './AppHeader.vue';
 
 export default {
@@ -73,11 +74,40 @@ export default {
     }
   },
   methods: {
-    confirmOrder() {
-      alert('Order confirmed! Please pay at the counter.');
-      this.cartItems = [];
-      localStorage.removeItem('cart');
-      this.$router.push({ name: 'Home' });
+    async loadCart(userId) {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/cart/${userId}`);
+        this.cartItems = response.data.map(item => ({
+          ...item,
+          quantity: item.quantity || 1
+        }));
+      } catch (error) {
+        console.error('Error loading cart:', error);
+      }
+    },
+    updateQuantity(item, index) {
+      this.cartItems[index].quantity = item.quantity;
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    },
+    async confirmOrder() {
+      const user = JSON.parse(localStorage.getItem('user-info'));
+      if (!user) {
+        alert('Please log in first.');
+        return;
+      }
+
+      try {
+        await axios.post('http://localhost:8000/api/cart/checkout', {
+          user_id: user.id,
+          items: this.cartItems
+        });
+        alert('Order confirmed! Please pay at the counter.');
+        this.cartItems = [];
+        localStorage.removeItem('cart');
+        this.$router.push({ name: 'OrderHistory' });
+      } catch (error) {
+        console.error('Error confirming order:', error);
+      }
     },
     removeFromCart(index) {
       this.cartItems.splice(index, 1);
@@ -86,9 +116,9 @@ export default {
     }
   },
   mounted() {
-    let cart = localStorage.getItem('cart');
-    if (cart) {
-      this.cartItems = JSON.parse(cart);
+    const user = JSON.parse(localStorage.getItem('user-info'));
+    if (user) {
+      this.loadCart(user.id);
     }
   }
 };
@@ -153,12 +183,6 @@ export default {
 .product-info {
   display: flex;
   align-items: center;
-}
-
-.product-image {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
 }
 
 .quantity-input {

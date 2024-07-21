@@ -1,10 +1,13 @@
 <template>
   <div class="sidebar">
     <img src="../assets/DineDynasty.png" alt="Dine Dynasty Logo" class="logo" />
+    <div v-if="username" class="welcome-message">Welcome, {{ username }}</div>
     <router-link v-if="isAdmin" to="/">Home</router-link>
     <router-link v-if="isAdmin" to="/add-menu">Add Menu</router-link>
+    <router-link v-if="isAdmin" to="/notifications-page">Notification</router-link>
     <router-link v-if="!isAdmin" to="/customer-menu">List Of Menu</router-link>
     <router-link v-if="!isAdmin" to="/cart">Cart</router-link>
+    <router-link v-if="!isAdmin" to="/order-history">Order History</router-link>
     <router-link v-if="isAdmin" to="/report">Report</router-link>
     <a v-on:click="logout" href="#">Logout</a>
   </div>
@@ -15,7 +18,8 @@ export default {
   name: 'AppHeader',
   data() {
     return {
-      isAdmin: false
+      isAdmin: false,
+      username: '' // Add username data property
     };
   },
   methods: {
@@ -29,6 +33,7 @@ export default {
     if (user) {
       user = JSON.parse(user);
       this.isAdmin = user.role === 'admin';
+      this.username = user.name; // Retrieve username from localStorage
     }
   }
 };
@@ -49,6 +54,12 @@ export default {
 .logo {
   width: 150px;
   margin-bottom: 20px; /* Add some space below the logo */
+}
+
+.welcome-message {
+  margin-bottom: 20px;
+  font-size: 16px; /* Adjust the font size as needed */
+  font-weight: bold;
 }
 
 .sidebar a {

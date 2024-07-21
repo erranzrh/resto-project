@@ -37,11 +37,22 @@ export default {
   },
   methods: {
     async addToCart(item) {
-      let cart = localStorage.getItem('cart');
-      let cartItems = cart ? JSON.parse(cart) : [];
-      cartItems.push(item);
-      localStorage.setItem('cart', JSON.stringify(cartItems));
-      alert('Item added to cart!');
+      const user = JSON.parse(localStorage.getItem('user-info'));
+      if (!user) {
+        alert('Please log in first.');
+        return;
+      }
+
+      try {
+        await axios.post('http://localhost:8000/api/cart', {
+          user_id: user.id,
+          menu_id: item.id,
+          quantity: 1 // Default quantity
+        });
+        alert('Item added to cart!');
+      } catch (error) {
+        console.error('Error adding to cart:', error);
+      }
     },
     async loadMenu() {
       try {
